@@ -13,6 +13,8 @@ export default function AppHeader() {
 				return 'Time Trial';
 			case '/account':
 				return 'Account Info';
+			case '/songs':
+				return 'Play Songs';
 			default:
 				return 'Learn Chords';
 		}
