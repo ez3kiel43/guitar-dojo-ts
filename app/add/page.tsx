@@ -51,7 +51,7 @@ export default function AddChords() {
 						chordData={strings}
 					/>
 				</div>
-				<div className="h-2/5">
+				<div>
 					<SaveChord />
 				</div>
 			</section>
