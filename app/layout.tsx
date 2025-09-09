@@ -1,16 +1,9 @@
 import type { Metadata } from 'next';
-import { Solway } from 'next/font/google';
 import './globals.css';
 import Image from 'next/image';
 import Logo from './assets/img/logo.svg';
 import AppHeader from './components/AppHeader';
 import AppMenu from './components/AppMenu';
-
-const solway = Solway({
-	variable: '--font-solway',
-	subsets: ['latin'],
-	weight: '400',
-});
 
 export const metadata: Metadata = {
 	title: 'Guitar Dojo',

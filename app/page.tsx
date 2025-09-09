@@ -19,14 +19,14 @@ export default function Home() {
 	const [currentChord, setCurrentChord] = useState<number>(0);
 
 	const changeChord = (e: React.MouseEvent<HTMLButtonElement>) => {
-		let index = chords.findIndex(c => {
+		const index = chords.findIndex(c => {
 			return e.currentTarget.textContent == c.cName;
 		});
 		setCurrentChord(index);
 	};
 
 	const changeFamily = (letter: string) => {
-		let tempArr: ChordTypes[] = [];
+		const tempArr: ChordTypes[] = [];
 
 		Info.map(c => {
 			if (c.cName[0] === letter.toUpperCase()) {

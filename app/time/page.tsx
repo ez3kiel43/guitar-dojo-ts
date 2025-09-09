@@ -22,12 +22,12 @@ export default function TimeTrial() {
 
 	const addToList = (e: React.MouseEvent<HTMLButtonElement>) => {
 		if (chords[0].strings != null) {
-			let index = chords.findIndex(c => {
+			const index = chords.findIndex(c => {
 				return e.currentTarget.textContent == c.cName;
 			});
 			setList([...list, chords[index]]);
 		} else {
-			let index = Info.findIndex(c => {
+			const index = Info.findIndex(c => {
 				return e.currentTarget.textContent == c.cName;
 			});
 			setList([...list, Info[index]]);
@@ -35,7 +35,7 @@ export default function TimeTrial() {
 	};
 
 	const changeFamily = (letter: string) => {
-		let tempArr: ChordTypes[] = [];
+		const tempArr: ChordTypes[] = [];
 
 		Info.map(c => {
 			if (c.cName[0] === letter.toUpperCase()) {
