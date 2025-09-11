@@ -10,6 +10,7 @@ const screens = [
 	{ title: 'Learn Chords', path: '/' },
 	{ title: 'Add A Chord', path: 'add' },
 	{ title: 'Time Trial', path: 'time' },
+	{ title: 'Account', path: 'account' },
 ];
 
 export default function AppMenu() {

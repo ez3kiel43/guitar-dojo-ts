@@ -1,5 +1,4 @@
 'use client';
-
 import { usePathname } from 'next/navigation';
 
 export default function AppHeader() {
@@ -12,7 +11,7 @@ export default function AppHeader() {
 			case '/time':
 				return 'Time Trial';
 			case '/account':
-				return 'Account Info';
+				return 'Account';
 			case '/songs':
 				return 'Play Songs';
 			default:

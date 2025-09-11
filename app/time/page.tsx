@@ -4,7 +4,7 @@ import SelectionMenu from '../components/ChordSelection';
 import ChordBox from '../components/ChordBox';
 import ChordTemplate from '../components/ChordTemplate';
 import { ChordTypes } from '../page';
-import Info from './../assets/data/chords.json';
+import Info from '../assets/data/chords.json';
 
 export default function TimeTrial() {
 	const [list, setList] = useState<ChordTypes[]>([]);
