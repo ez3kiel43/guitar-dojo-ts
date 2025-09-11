@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
-import { updateSession } from './app/lib/utils/middleware';
+import { updateSession } from './app/utils/middleware';
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
 	console.log('Middleware running for', request.nextUrl.pathname);
