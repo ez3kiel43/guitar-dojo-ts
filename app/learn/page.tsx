@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
-import ChordTemplate from './components/ChordTemplate';
-import Info from './assets/data/chords.json';
-import SelectionMenu from './components/ChordSelection';
+import ChordTemplate from '../components/ChordTemplate';
+import Info from '../assets/data/chords.json';
+import SelectionMenu from '../components/ChordSelection';
 
 export interface ChordTypes {
 	cName: string;

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import SelectionMenu from '../components/ChordSelection';
 import ChordBox from '../components/ChordBox';
 import ChordTemplate from '../components/ChordTemplate';
-import { ChordTypes } from '../page';
+import { ChordTypes } from '../learn/page';
 import Info from '../assets/data/chords.json';
 
 export default function TimeTrial() {

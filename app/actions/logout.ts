@@ -1,11 +1,8 @@
-'use server';
-
 import { redirect } from 'next/navigation';
-import { createClient } from '../utils/server';
+import { supabaseBrowserClient } from '../utils/supabaseBrowserClient';
 
 export async function logout() {
-	const supabase = await createClient();
-	supabase.auth.signOut();
+	supabaseBrowserClient.auth.signOut();
 	redirect('/');
 }
 

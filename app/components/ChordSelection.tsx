@@ -1,6 +1,6 @@
 import ChordBox from './ChordBox';
 
-import { ChordTypes } from '../page';
+import { ChordTypes } from '../learn/page';
 
 interface selectionMenuTypes {
 	data: ChordTypes[];
