@@ -1,7 +1,6 @@
 'use client';
 
 import { supabaseBrowserClient } from '../utils/supabaseBrowserClient';
-import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 
 export default function LogoutButton() {
@@ -10,7 +9,6 @@ export default function LogoutButton() {
 	const handleLogout = async () => {
 		await supabaseBrowserClient.auth.signOut();
 		localStorage.removeItem('lastSession');
-		toast.info('You have logged out');
 		router.push('/login'); // or wherever you want
 	};
 

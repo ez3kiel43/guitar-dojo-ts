@@ -4,6 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import AppHeader from './components/AppHeader';
 import AppMenu from './components/AppMenu';
 import { AuthListener } from './components/AuthListener';
+import Image from 'next/image';
+import Logo from './assets/img/logo.svg';
 
 export default function RootLayout({
 	children,
@@ -31,6 +33,11 @@ export default function RootLayout({
 					/>
 				</main>
 				<footer className="bg-navy h-20 w-screen fixed bottom-0">
+					<Image
+						src={Logo}
+						alt="Guitar Dojo"
+						className="h-full"
+					/>
 					<AppMenu />
 				</footer>
 			</body>

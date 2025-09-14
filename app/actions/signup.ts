@@ -2,11 +2,8 @@
 
 import { supabaseBrowserClient } from '../utils/supabaseBrowserClient';
 import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
 
 export async function signup(email: string, password: string) {
-	const router = useRouter();
-
 	const { data, error } = await supabaseBrowserClient.auth.signUp({
 		email,
 		password,
@@ -16,7 +13,7 @@ export async function signup(email: string, password: string) {
 		toast.error(
 			error.message || 'Something went wrong. Please try again'
 		);
-		return false;
+		return { success: false, user: null };
 	}
 
 	if (data.user) {
@@ -25,10 +22,9 @@ export async function signup(email: string, password: string) {
 			localStorage.setItem('lastSession', data.session.user.id);
 		}
 
-		toast.success('Signup successful! Welcome!');
-		router.push('/learn'); // redirect after toast
-		return true;
+		if (data.session !== null)
+			return { success: true, user: data.session.user };
 	}
 
-	return false;
+	return { success: false, user: null };
 }

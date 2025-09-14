@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { login } from '../actions/login';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { User } from '@supabase/supabase-js';
+import { signup } from '../actions/signup';
+import { toast } from 'react-toastify';
 
 export default function LoginPage() {
 	const [email, setEmail] = useState('');
@@ -14,16 +14,14 @@ export default function LoginPage() {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		const data: { success: boolean; user: User | null } = await login(
+		const data: { success: boolean; user: User | null } = await signup(
 			email,
 			password
 		);
 
-		if (data.success === true && data.user !== null) {
-			// save session info for toast deduping if needed
-			localStorage.setItem('lastSession', data.user.id);
-			// redirect after toast
-			router.push('/learn');
+		if (data.success === true) {
+			router.push('/login');
+			toast.warn('Please verify your email before logging in');
 		}
 	};
 
@@ -51,11 +49,8 @@ export default function LoginPage() {
 				className="my-3 border-navy border-2 rounded-md text-navy p-2 font-serif bg-sand w-3/5"
 				type="submit"
 			>
-				Log in
+				Sign Up
 			</button>
-			<p>
-				No Account? <Link href={'/signup'}>Sign Up Here!</Link>
-			</p>
 		</form>
 	);
 }

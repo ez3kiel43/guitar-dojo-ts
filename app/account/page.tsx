@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useState } from 'react';
 import LogoutBtn from '../components/LogoutBtn';
 import { supabaseBrowserClient } from '../utils/supabaseBrowserClient';
