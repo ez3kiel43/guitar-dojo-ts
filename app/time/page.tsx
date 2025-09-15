@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SelectionMenu from '../components/ChordSelection';
 import ChordBox from '../components/ChordBox';
 import ChordTemplate from '../components/ChordTemplate';
@@ -22,8 +22,23 @@ export default function TimeTrial() {
 	const [currIndex, setCurrIndex] = useState<number>(0);
 	const [timeInt, setTimeInt] = useState<number>(5000);
 	const [timer, setTimer] = useState<number>(0);
-	const [order, setOrder] = useState<string>('ordered');
-	const [paused, setPaused] = useState<boolean>(false);
+	const [countdown, setCountdown] = useState<number>(0);
+	const [timeLeft, setTimeLeft] = useState<number>(timeInt);
+	const [order, setOrder] = useState<string | null>(null);
+
+	useEffect(() => {
+		if (!practicing) {
+			setList([]);
+			setChords([
+				{ cName: 'A', strings: [-1, 0, 2, 2, 2, 0], fret: 0 },
+				{ cName: 'Am', strings: [-1, 0, 2, 2, 1, 0], fret: 0 },
+				{ cName: 'Asus', strings: [-1, 0, 2, 2, 3, 0], fret: 0 },
+			]);
+			setTimeInt(5000);
+			setTimeLeft(0);
+			setOrder(null);
+		}
+	}, [practicing]);
 
 	const addToList = (e: React.MouseEvent<HTMLButtonElement>) => {
 		if (chords[0].strings != null) {
@@ -75,10 +90,10 @@ export default function TimeTrial() {
 				});
 			}, timeInt)
 		);
+		countdownTimer();
 	}
 
 	function orderedCycle() {
-		// console.log(list[currIndex]);
 		setTimer(
 			window.setInterval(() => {
 				setCurrIndex(prevCurrIndex => {
@@ -86,14 +101,39 @@ export default function TimeTrial() {
 				});
 			}, timeInt)
 		);
+		countdownTimer();
+	}
+
+	function countdownTimer() {
+		let timeElapsed = 0;
+		setCountdown(
+			window.setInterval(() => {
+				setTimeLeft(timeInt - (timeElapsed % timeInt));
+				timeElapsed += 50;
+			}, 50)
+		);
+	}
+
+	function pause() {
+		clearInterval(timer);
+		clearInterval(countdown);
+		setTimeLeft(0);
+	}
+
+	function resume() {
+		if (order === 'ordered') {
+			orderedCycle();
+		} else {
+			randomCycle();
+		}
 	}
 
 	return (
 		<>
 			{practicing ? (
 				<>
-					<section className="h-full flex flex-col justify-around">
-						<div className="h-2/3">
+					<section className="h-5/6 flex flex-col justify-around">
+						<div className="h-3/5">
 							<ChordTemplate
 								chordData={list[currIndex].strings}
 								clickFn={() => {}}
@@ -102,18 +142,23 @@ export default function TimeTrial() {
 								{list[currIndex].cName}
 							</h3>
 						</div>
+						<div>
+							<p className="text-maroon ml-4">{`${(
+								timeLeft / 1000
+							).toFixed(2)}`}</p>
+						</div>
 						<div className="w-full flex justify-around">
-							<button>
+							<button onClick={resume}>
 								<Image alt="Play" src={PlayIcon} />
 							</button>
-
-							<button>
+							<button onClick={pause}>
 								<Image alt="Pause" src={PauseIcon} />
 							</button>
 							<button
 								onClick={() => {
 									setPracticing(false);
 									clearInterval(timer);
+									clearInterval(countdown);
 								}}
 							>
 								<Image src={StopIcon} alt="Stop" />
@@ -149,7 +194,6 @@ export default function TimeTrial() {
 									})}
 								</div>
 							</article>
-
 							<article className="font-serif text-navy text-xl flex flex-col">
 								<label htmlFor="ordered">
 									<input
@@ -207,19 +251,20 @@ export default function TimeTrial() {
 						</section>
 						<section className="md:w-1/5 flex justify-between">
 							<button
-								className="font-serif text-navy border-navy border-4 bg-sand text-xl rounded-md h-10 w-2/5 flex justify-around"
+								className="font-serif text-navy border-navy border-4 bg-sand text-xl rounded-md h-10 w-2/5 flex justify-around disabled:border-gray-600 disabled:text-gray-500 disabled:bg-gray-300 transition-all duration-200"
 								onClick={() => {
-									if (list.length > 0) {
-										setPracticing(true);
-										if (order === 'ordered') {
-											orderedCycle();
-										} else {
-											randomCycle();
-										}
+									setPracticing(true);
+									if (order === 'ordered') {
+										orderedCycle();
 									} else {
-										setPracticing(false);
+										randomCycle();
 									}
 								}}
+								disabled={
+									order !== null && list.length > 0
+										? false
+										: true
+								}
 							>
 								Go!
 								<Image
@@ -229,7 +274,7 @@ export default function TimeTrial() {
 							</button>
 
 							<button
-								className="font-serif text-maroon border-maroon border-4 bg-white text-xl rounded-md h-10 w-2/5 ml-12"
+								className="font-serif text-maroon border-maroon border-4 bg-white text-xl rounded-md h-10 w-2/5 ml-12 disabled:border-gray-600 disabled:text-gray-500 disabled:bg-gray-300 transition-all duration-500"
 								onClick={() => {
 									setList([]);
 								}}
