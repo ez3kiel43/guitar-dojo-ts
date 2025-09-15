@@ -21,16 +21,18 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`text-solway antialiased bg-white w-dvw h-dvh flex flex-col overflow-hidden`}
+				className={`solway antialiased bg-white w-dvw h-dvh flex flex-col overflow-hidden`}
 			>
 				<AppHeader />
-				<main className="w-full h-full p-2 pb-24">{children}</main>
+				<main className={`w-full h-full p-2 pb-24 solway`}>
+					{children}
+				</main>
 				<footer className="bg-navy h-20 w-screen fixed bottom-0">
 					<Image
 						src={Logo}
 						alt="Guitar Dojo"
-						className="h-full w-1/2"
-						priority
+						className="h-full w-auto"
+						loading="eager"
 					/>
 					<AppMenu />
 				</footer>

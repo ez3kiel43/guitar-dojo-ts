@@ -5,6 +5,11 @@ import ChordBox from '../components/ChordBox';
 import ChordTemplate from '../components/ChordTemplate';
 import { ChordTypes } from '../page';
 import Info from './../assets/data/chords.json';
+import Image from 'next/image';
+import Stopwatch from './../assets/img/stopwatch.svg';
+import PlayIcon from './../assets/img/play_icon.svg';
+import PauseIcon from './../assets/img/pause_icon.svg';
+import StopIcon from './../assets/img/stop_icon.svg';
 
 export default function TimeTrial() {
 	const [list, setList] = useState<ChordTypes[]>([]);
@@ -87,50 +92,38 @@ export default function TimeTrial() {
 		<>
 			{practicing ? (
 				<>
-					<section className="h-5/6">
-						<h3 className="font-serif text-navy text-center text-3xl">
-							{list[currIndex].cName}
-						</h3>
-						<ChordTemplate
-							chordData={list[currIndex].strings}
-							clickFn={() => {}}
-						/>
-						<button
-							className="font-serif text-navy border-navy border-4 bg-white text-xl rounded-md h-10 w-2/5"
-							onClick={
-								paused
-									? () => {
-											if (
-												order === 'ordered'
-											) {
-												orderedCycle();
-											} else {
-												randomCycle();
-											}
-											setPaused(false);
-									  }
-									: () => {
-											clearInterval(timer);
-											setPaused(true);
-									  }
-							}
-						>
-							{paused ? 'PLAY' : 'PAUSE'}
-						</button>
-						<button
-							className="font-serif text-rose-800 border-rose-800 border-4 bg-white text-xl rounded-md h-10 w-2/5 ml-12"
-							onClick={() => {
-								setPracticing(false);
-								clearInterval(timer);
-							}}
-						>
-							STOP
-						</button>
+					<section className="h-full flex flex-col justify-around">
+						<div className="h-2/3">
+							<ChordTemplate
+								chordData={list[currIndex].strings}
+								clickFn={() => {}}
+							/>
+							<h3 className="font-serif text-navy text-center text-3xl my-2">
+								{list[currIndex].cName}
+							</h3>
+						</div>
+						<div className="w-full flex justify-around">
+							<button>
+								<Image alt="Play" src={PlayIcon} />
+							</button>
+
+							<button>
+								<Image alt="Pause" src={PauseIcon} />
+							</button>
+							<button
+								onClick={() => {
+									setPracticing(false);
+									clearInterval(timer);
+								}}
+							>
+								<Image src={StopIcon} alt="Stop" />
+							</button>
+						</div>
 					</section>
 				</>
 			) : (
 				<>
-					<div className="md:flex md:flex-row md:flex-wrap md:gap-4 md:justify-start w-full">
+					<div className="md:flex md:flex-row md:flex-wrap md:gap-4 md:justify-start w-full h-full">
 						<section className="md:w-2/5">
 							<SelectionMenu
 								data={chords}
@@ -138,7 +131,7 @@ export default function TimeTrial() {
 								changeFn={changeFamily}
 							/>
 
-							<article className="h-36 md:w-1/2">
+							<article className="h-24 md:w-1/2">
 								<h2 className="font-serif text-left text-navy text-xl w-full px-2">
 									Current Selection:
 								</h2>
@@ -191,7 +184,7 @@ export default function TimeTrial() {
 								<select
 									name="interval"
 									id="interval"
-									className="bg-white text-navy w-2/5 h-8 my-2 font-serif text-lg"
+									className="bg-sand text-navy w-2/5 h-8 my-2 font-serif text-lg"
 									onChange={e => {
 										setTimeInt(
 											Number(
@@ -212,9 +205,9 @@ export default function TimeTrial() {
 								</select>
 							</article>
 						</section>
-						<section className="md:w-1/5">
+						<section className="md:w-1/5 flex justify-between">
 							<button
-								className="font-serif text-navy border-navy border-4 bg-white text-xl rounded-md h-10 w-2/5"
+								className="font-serif text-navy border-navy border-4 bg-sand text-xl rounded-md h-10 w-2/5 flex justify-around"
 								onClick={() => {
 									if (list.length > 0) {
 										setPracticing(true);
@@ -229,10 +222,14 @@ export default function TimeTrial() {
 								}}
 							>
 								Go!
+								<Image
+									src={Stopwatch}
+									alt="stopwatch"
+								/>
 							</button>
 
 							<button
-								className="font-serif text-rose-800 border-rose-800 border-4 bg-white text-xl rounded-md h-10 w-2/5 ml-12"
+								className="font-serif text-maroon border-maroon border-4 bg-white text-xl rounded-md h-10 w-2/5 ml-12"
 								onClick={() => {
 									setList([]);
 								}}

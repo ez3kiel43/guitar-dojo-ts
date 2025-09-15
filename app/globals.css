@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Solway:wght@300;400;500;700;800&display=swap');
 @import 'tailwindcss';
 
 @theme {
@@ -5,4 +6,34 @@
 	--color-sand: #e7d7c1;
 	--color-maroon: #76191c;
 	--color-white: #ffffff;
+}
+
+.solway-light {
+	font-family: 'Solway', serif;
+	font-weight: 300;
+	font-style: normal;
+}
+
+.solway {
+	font-family: 'Solway', serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.solway-medium {
+	font-family: 'Solway', serif;
+	font-weight: 500;
+	font-style: normal;
+}
+
+.solway-bold {
+	font-family: 'Solway', serif;
+	font-weight: 700;
+	font-style: normal;
+}
+
+.solway-extrabold {
+	font-family: 'Solway', serif;
+	font-weight: 800;
+	font-style: normal;
 }
