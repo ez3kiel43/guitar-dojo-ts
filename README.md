@@ -9,6 +9,7 @@ A web app for learning and practicing guitar chords, built with Next.js + TypeSc
 - Write songs with chord + lyric sheets
 - Save and manage custom chords
 - Offline backup using custom JSON download/upload
+- Full PWA functionality
 
 ## 📦 Tech Stack
 - Next.js (TypeScript, App Router)
