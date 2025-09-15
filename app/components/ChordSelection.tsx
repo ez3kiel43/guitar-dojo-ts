@@ -24,7 +24,7 @@ export default function SelectionMenu({
 			<select
 				id="chord-selection"
 				name="chord-selection"
-				className="bg-sand text-navy w-2/5 h-8 my-2 font-serif text-lg"
+				className="bg-sand text-navy w-2/5 h-8 my-2 solway text-2xl rounded"
 				onChange={e => {
 					changeFn(e.target.value);
 				}}

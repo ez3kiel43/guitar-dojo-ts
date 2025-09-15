@@ -4,18 +4,18 @@ export default function SaveChord() {
 			onSubmit={e => {
 				e.preventDefault();
 			}}
-			className="md:w-2/5"
+			className="md:w-2/5 solwaytext-lg"
 		>
 			<div className="flex justify-between items-end">
 				<label
 					htmlFor="chord_family"
-					className="font-serif text-navy block w-2/5"
+					className=" text-navy block w-2/5"
 				>
 					Chord Family:
 					<select
 						name="chord_family"
 						id="chord_family"
-						className="bg-sand text-navy w-full h-8 my-2 font-serif text-lg"
+						className="bg-sand text-navy w-full h-8 my-2 text-xl rounded"
 					>
 						<option value="A">A</option>
 						<option value="B">B</option>
@@ -57,7 +57,7 @@ export default function SaveChord() {
 			<input
 				type="submit"
 				value={'Save Chord'}
-				className="my-6 border-navy border-2 rounded-md text-navy p-2 font-serif bg-sand w-2/3"
+				className="my-6 border-navy border-2 rounded-md text-navy p-2 solway text-2xl bg-sand w-2/3"
 			/>
 		</form>
 	);

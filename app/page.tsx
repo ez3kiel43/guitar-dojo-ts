@@ -41,15 +41,15 @@ export default function Home() {
 
 	return (
 		<div className="w-full h-full">
-			<h2 className="text-center text-3xl font-serif text-navy">
-				{chords[currentChord].cName}
-			</h2>
 			<div className="h-3/5">
 				<ChordTemplate
 					clickFn={() => {}}
 					chordData={chords[currentChord].strings}
 				/>
 			</div>
+			<h2 className="text-center text-5xl solway-medium font-serif text-navy">
+				{chords[currentChord].cName}
+			</h2>
 			<div className="h-1/5">
 				<SelectionMenu
 					data={chords}
